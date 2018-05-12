@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
+import org.joda.time.chrono.ISOChronology;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,22 +30,23 @@ public class UserSortingIT {
 	@Autowired
 	private WebTestClient webTestClient;
 
-	private static final int NUM_OF_USERS = 100000;
+	private static final int NUM_OF_USERS = 5000;
 
 	private List<Customer> testData = new ArrayList<>();
 
-	private static final String API_ENDPOINT = "/api/userInfo/sort";
+	private static final String API_ENDPOINT = "/api/customers/sort";
 
 	@Before
 	public void fillTestData() {
 		Random longRandom = new Random( Long.SIZE - 1 );
+		DateTime basic = DateTime.now().withMillisOfDay( 0 ).withChronology( ISOChronology.getInstanceUTC() );
 		for ( int i = 0; i < NUM_OF_USERS; i++ ) {
 			Customer customer = new Customer();
 			long rand = Math.abs( longRandom.nextLong() );
 			customer.setId( rand );
 			customer.setName( "testN" + rand );
-			customer.setDueTime( new DateTime( rand ).withZone( DateTimeZone.UTC ) );
-			customer.setJoinTime( DateTime.now().withZone( DateTimeZone.UTC ) );
+			customer.setDueTime( basic.plusMinutes( longRandom.nextInt( NUM_OF_USERS ) ) );
+			customer.setJoinTime( basic );
 			testData.add( customer );
 		}
 	}

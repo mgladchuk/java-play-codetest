@@ -1,5 +1,7 @@
 # Qudini web developer code test
 
+Default endpoint for testing -> http://localhost:8080/api/customers/sort
+
 To test how quickly you can pick up a new project and follow requirements we ask candidates to do the following project. You have a choice of web frameworks you can use: 
 
 - Play Framework 2 : (Play 2.x https://www.playframework.com/download)

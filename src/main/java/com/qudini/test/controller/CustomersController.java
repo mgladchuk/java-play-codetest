@@ -14,7 +14,7 @@ import com.qudini.test.service.CustomersService;
 import reactor.core.publisher.Flux;
 
 @RestController
-@RequestMapping( "/api/customer" )
+@RequestMapping( "/api/customers" )
 public class CustomersController {
 
 	@Autowired
